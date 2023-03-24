@@ -3,7 +3,7 @@ import LogoCrypto from "../img/LogoCrypto.png";
 const Header = () => {
   return (
     <header>
-      <div className="flex justify-center items-center w-2/6 mx-auto pt-4">
+      <div className="flex justify-center items-center md:w-2/6 mx-10 md:mx-auto pt-4">
         <img src={LogoCrypto} alt="Logo" className=" w-20 h-20" />
         <div>
           <h1 className="text-4xl text-white ml-10">Crypto Quoter</h1>

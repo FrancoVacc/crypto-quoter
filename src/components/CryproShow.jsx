@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
 
-const CryproShow = () => {
+const CryproShow = ({ item }) => {
   const [show, setShow] = useState(false);
   const [hidden, setHidden] = useState(false);
 
+  const { id, name, price, highday, lowday, lastupdate } = item;
+
   useEffect(() => {
     if (!show) {
-      setHidden("block");
-    } else {
       setHidden("hidden");
+    } else {
+      setHidden("blok");
     }
   }, [show]);
 
@@ -24,10 +26,10 @@ const CryproShow = () => {
     <div className=" bg-indigo-500 rounded-md overflow-hidden">
       <div className="p-5">
         <div className="flex gap-3 items-center">
-          <img src="" alt="logo" />
+          <h2 className="text-3xl text-white font-bold">{id}</h2>
           <div>
-            <h2 className="text-3xl text-white font-bold">name</h2>
-            <p className="text-xl text-white font-semibold">Price: $0.00</p>
+            <h2 className="text-3xl text-white font-bold">{name}</h2>
+            <p className="text-xl text-white font-semibold">Price: {price}</p>
           </div>
         </div>
 
@@ -37,11 +39,11 @@ const CryproShow = () => {
               <p className={`text-white ${hidden}`}>
                 Highest price of the day:
               </p>
-              <p className={`text-white ${hidden}`}>0.00</p>
+              <p className={`text-white ${hidden}`}>{highday}</p>
             </li>
             <li className="grid grid-cols-2">
               <p className={`text-white ${hidden}`}>Lowest price of the day:</p>
-              <p className={`text-white ${hidden}`}>0.00</p>
+              <p className={`text-white ${hidden}`}>{lowday}</p>
             </li>
             <li className="grid grid-cols-2">
               <p className={`text-white ${hidden}`}>Variation:</p>
@@ -49,7 +51,7 @@ const CryproShow = () => {
             </li>
             <li className="grid grid-cols-2">
               <p className={`text-white ${hidden}`}>Last update:</p>
-              <p className={`text-white ${hidden}`}>now</p>
+              <p className={`text-white ${hidden}`}>{lastupdate}</p>
             </li>
           </ul>
         </div>
@@ -58,7 +60,7 @@ const CryproShow = () => {
         className=" bg-cyan-500 h-5 flex justify-center"
         onClick={handleShow}
       >
-        {show ? (
+        {!show ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"

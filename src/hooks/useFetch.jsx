@@ -5,15 +5,16 @@ export const useFetch = ({ currency }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  console.log(currency);
-
   const consultaApi = async (url) => {
     try {
       setLoading(true);
       const res = await fetch(url);
 
       if (!res.ok) {
-        throw new Error("Error en la API");
+        throw new Error({
+          status: res.status,
+          statusText: res.statusText || "Error 404",
+        });
       }
 
       const json = await res.json();
@@ -28,6 +29,7 @@ export const useFetch = ({ currency }) => {
               highday: item.DISPLAY.USD.HIGHDAY,
               lowday: item.DISPLAY.USD.LOWDAY,
               lastupdate: item.DISPLAY.USD.LASTUPDATE,
+              change: item.DISPLAY.USD.CHANGEPCTDAY,
             };
             return objetoUSD;
           case "GBP":
@@ -38,6 +40,7 @@ export const useFetch = ({ currency }) => {
               highday: item.DISPLAY.GBP.HIGHDAY,
               lowday: item.DISPLAY.GBP.LOWDAY,
               lastupdate: item.DISPLAY.GBP.LASTUPDATE,
+              change: item.DISPLAY.GBP.CHANGEPCTDAY,
             };
             return objetoGBP;
           case "EUR":
@@ -48,6 +51,7 @@ export const useFetch = ({ currency }) => {
               highday: item.DISPLAY.EUR.HIGHDAY,
               lowday: item.DISPLAY.EUR.LOWDAY,
               lastupdate: item.DISPLAY.EUR.LASTUPDATE,
+              change: item.DISPLAY.EUR.CHANGEPCTDAY,
             };
             return objetoEUR;
           case "ARS":
@@ -58,6 +62,7 @@ export const useFetch = ({ currency }) => {
               highday: item.DISPLAY.ARS.HIGHDAY,
               lowday: item.DISPLAY.ARS.LOWDAY,
               lastupdate: item.DISPLAY.ARS.LASTUPDATE,
+              change: item.DISPLAY.ARS.CHANGEPCTDAY,
             };
             return objetoARS;
           case "MEX":
@@ -68,6 +73,7 @@ export const useFetch = ({ currency }) => {
               highday: item.DISPLAY.MEX.HIGHDAY,
               lowday: item.DISPLAY.MEX.LOWDAY,
               lastupdate: item.DISPLAY.MEX.LASTUPDATE,
+              change: item.DISPLAY.MEX.CHANGEPCTDAY,
             };
             return objetoMEX;
         }

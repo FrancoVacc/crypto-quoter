@@ -1,7 +1,8 @@
 import Form from "./components/Form";
 import Header from "./components/Header";
 import CryptoShow from "./components/CryproShow";
-import { useEffect, useState } from "react";
+import Loader from "./components/Loader";
+import { useState } from "react";
 import { useFetch } from "./hooks/useFetch";
 
 function App() {
@@ -12,9 +13,9 @@ function App() {
   const { consultaApi, data, loading, error } = useFetch({ currency });
 
   return (
-    <div className=" bg-indigo-900 h-screen">
+    <div className="bg-indigo-900 h-auto pb-2">
       <Header />
-      <main className="mx-10 md:w-2/6 md:mx-auto">
+      <main className="mx-2 md:w-2/6 md:mx-auto">
         <Form
           setFetch={setFetch}
           url={url}
@@ -30,7 +31,9 @@ function App() {
             Choose a currency
           </h2>
         ) : loading ? (
-          <p>cargando</p>
+          <div className="flex justify-center py-10">
+            <Loader />
+          </div>
         ) : data ? (
           data.map((item) => (
             <section className="mt-4" key={item.id}>
@@ -38,7 +41,12 @@ function App() {
             </section>
           ))
         ) : (
-          error && <p>error</p>
+          error && (
+            <p className="text-white text-4xl font-bold text-center py-10">
+              Error:{error.status}
+              {error.statusText}
+            </p>
+          )
         )}
       </main>
     </div>

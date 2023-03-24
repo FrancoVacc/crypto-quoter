@@ -8,6 +8,8 @@ const Form = ({
   currency,
   setCurrency,
 }) => {
+  const [validationError, setValidationError] = useState("");
+
   useEffect(() => {
     if (currency) {
       setUrl(
@@ -24,8 +26,11 @@ const Form = ({
     e.preventDefault();
     if (currency) {
       consultaApi(url);
+      setFetch(true);
+    } else {
+      setValidationError("Required Currency");
+      setFetch(false);
     }
-    setFetch(true);
   };
 
   return (
@@ -55,6 +60,11 @@ const Form = ({
         value="Search"
         className="w-[100%] rounded text-white text-xl bg-indigo-800 hover:bg-indigo-600 col-span-2 py-2 mt-5"
       />
+      {validationError && (
+        <p className="bg-red-700 py-2 text-center text-white col-span-2">
+          {validationError}
+        </p>
+      )}
     </form>
   );
 };

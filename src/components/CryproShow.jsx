@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import Variation from "./Variation";
 
 const CryproShow = ({ item }) => {
   const [show, setShow] = useState(false);
   const [hidden, setHidden] = useState(false);
 
-  const { id, name, price, highday, lowday, lastupdate } = item;
+  const { id, name, price, highday, lowday, lastupdate, change } = item;
 
   useEffect(() => {
     if (!show) {
@@ -23,7 +24,7 @@ const CryproShow = ({ item }) => {
   };
 
   return (
-    <div className=" bg-indigo-500 rounded-md overflow-hidden">
+    <div className=" bg-indigo-500 rounded-md overflow-hidden mb-2">
       <div className="p-5">
         <div className="flex gap-3 items-center">
           <h2 className="text-3xl text-white font-bold">{id}</h2>
@@ -46,8 +47,7 @@ const CryproShow = ({ item }) => {
               <p className={`text-white ${hidden}`}>{lowday}</p>
             </li>
             <li className="grid grid-cols-2">
-              <p className={`text-white ${hidden}`}>Variation:</p>
-              <p className={`text-white ${hidden}`}>0.00</p>
+              <Variation change={change} hidden={hidden} />
             </li>
             <li className="grid grid-cols-2">
               <p className={`text-white ${hidden}`}>Last update:</p>
